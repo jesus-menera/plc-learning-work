@@ -16,11 +16,11 @@ States:
 
 LIMIT-1-NOT-ACTIVATED 	| LIMIT-2-ACTIVATED 	| Possible States of Door |
 --------------------------------------------------------------------------|
-F 			|T			| DOOR-Fully-Open	  |
+F 			| T			| DOOR-Fully-Open	  |
 ------------------------|-----------------------|-------------------------|
-T			|T			| DOOR-In-Mid-Way 	  |
+T			| T			| DOOR-In-Mid-Way 	  |
 ------------------------|-----------------------|---------------|---------|
-T 			|F			| DOOR-Fully-Shut	  |
+T 			| F			| DOOR-Fully-Shut	  |
 
 _______________________________________________________________________________
 
@@ -31,7 +31,7 @@ F		| F 		| DOOR-Fully-Stoped |
 ----------------|---------------|-------------------|
  -		| - 		| DOOR-In-Motion    |
 
-Fullfillment:
+Fulfillments:
 
 1.
 	if( DOOR-Fully-Open )

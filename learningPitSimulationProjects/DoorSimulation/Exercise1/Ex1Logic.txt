@@ -1,35 +1,55 @@
-OPEN-PRESSED LIMIT-1-NOT-REACHED(XIC) MOTORUP MOTORDOWN(XIO)
+Requirements:
 
-if (MOTORDOWN(XIO)=TRUE AND (OPEN-PRESSED == TRUE) AND LIMIT-1-NOT-REACHED == TRUE)
-{
-	MOTOR-UP = TRUE
-}
-else{
-	MOTOR-UP = FALSE
-}
+1.In this exercise the Open and Close pushbuttons will be used to control the movement of the door. Movement will not be maintained when either switch is released, and therefore the Stop switch is neither required nor used in this exercise. However, all other available Inputs and Outputs are employed in this exercise.
 
--------------------
+2.Pressing the Open Switch will cause the door to move upwards (open) if not already fully open. The opening operation will continue as long as the switch is held down. If the switch is released, or if limit switch LS1 opens, the door movement will halt immediately.
 
-STOP-PRESSED LIMIT-2-REACHED(XIO) MOTORDOWN MOTORUP(XIO)
+3.Pressing the Close Switch will cause the door to move down (close) if not already fully closed. The closing operation will continue as long as the switch is held down. If the switch is released, or if limit switch LS2 closes, the door movement will halt immediately.
 
-if (MOTORUP(XIO)=TRUE AND (STOP-PRESSED == TRUE) AND LIMIT-2-REACHED(XIO) == TRUE)
-{
-	MOTOR-DOWN = TRUE
-}
-else{
-	MOTOR-DOWN = FALSE
-}
--------------------
-LIMIT-1-NOT-REACHED(XIO) OPEN-LIGHT-ON
+4.If the Door is already fully opened, Pressing the Open Switch will Not energize the motor.
 
-if(LIMIT-1-NOT-REACHED(XIO)==TRUE)
-{
-	OPEN-LIGHT-ON = TRUE
-}
--------------------
-LIMIT-2-REACHED(XIC) OPEN-LIGHT-ON
+5.If the Door is already fully closed, Pressing the Close Switch will Not energize the motor.
 
-if(LIMIT-2-REACHED(XIC)==TRUE)
-{
-	SHUT-LIGHT-ON = TRUE
-}
+6.Under no circumstance will both motor windings be energized at the same time.
+
+7.The Open Lamp will be illuminated if the door is in the Fully Open position.
+
+8.The Shut Lamp will be illuminated if the door is in the Fully Closed position.
+
+States:
+
+	buttons:	OPEN-PRESSED,	CLOSE-PRESSED
+	lights:		OPEN-LIGHT-ON, SHUT-LIGHT-ON
+	motor:		MOTOR-UP, MOTOR-DOWN
+	limits:		LIMIT-1-NOT-ACTIVATED,	LIMIT-2-ACTIVATED
+
+
+Fulfillment:
+
+1. Done
+2,4,6. Done
+
+	if ( (!(MOTOR-DOWN) AND OPEN-PRESSED AND LIMIT-1-NOT-ACTIVATED)
+	{
+		MOTOR-UP = TRUE
+	}
+
+3,4,6.
+
+	if ( !(MOTOR-UP) AND CLOSE-PRESSED AND !(LIMIT-2-ACTIVATED) ) 
+	{
+		MOTOR-DOWN = TRUE
+	}
+
+7.
+
+	if( !(LIMIT-1-NOT-REACHED) )
+	{
+		OPEN-LIGHT-ON = TRUE
+	}
+8.
+
+	if( LIMIT-2-REACHED )
+	{
+		SHUT-LIGHT-ON = TRUE
+	}

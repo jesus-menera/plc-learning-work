@@ -1,51 +1,87 @@
-OPEN-PRESSED LIMIT-1-NOT-REACHED(XIC) MOTORUP MOTORDOWN(XIO)
+Base: EX1Logic
 
-if (MOTORDOWN(XIO) AND (OPEN-PRESSED == TRUE OR MOTOR-UP==TRUE ) AND LIMIT-1-NOT-REACHED == TRUE)
-{
-	MOTOR-UP = TRUE
-}
-else{
-	MOTOR-UP = FALSE
-}
+Requirements:
+
+1.Door movement will halt immediately when the Stop Switch is initially pressed, and will remain halted if the switch is released.
+
+2.Pressing the Open Switch will cause the door to Open if not already fully open. The opening operation will continue to completion even if the switch is released.
+
+3.Pressing the Close Switch will cause the door to Close if not already fully shut. The closing operation will continue to completion even if the Switch is released.
+
+4.If the Door is already fully opened, Pressing the Open Switch will Not energize the motor.
+
+5.If the Door is already fully closed, Pressing the Close Switch will Not energize the motor.
+
+6.Under no circumstance will both motor windings be energized at the same time.
+
+7.The Ajar Lamp will be illuminated if the door is NOT in either the fully closed or fully opened position.
+
+8.The Open Lamp will be illuminated if the door is in the Fully Open position.
+
+9.The Shut Lamp will be illuminated if the door is in the Fully Closed position.
+
+States:
+	buttons:	OPEN-PRESSED,	CLOSE-PRESSED, STOP-PRESSED
+	lights:		OPEN-LIGHT-ON, SHUT-LIGHT-ON
+	motor:		MOTOR-UP, MOTOR-DOWN
+	limits:		LIMIT-1-NOT-ACTIVATED,	LIMIT-2-ACTIVATED
+
+	LIMIT-1-NOT-REACHED	| LIMIT-2-REACHED	| OPEN	| AJAR	| SHUT  |
+	------------------------|-----------------------|-------|-------|-------|
+	T			| T			| F	| T	| F	|
+	------------------------|-----------------------|-------|-------|-------|
+	T			| F			| F	| F	| T	|
+	------------------------|-----------------------|-------|-------|-------|
+	F			| T			| T	| F	| F	|
+	------------------------|-----------------------|-------|-------|-------|
+
+
+Fulfillments:
+
+----
+
+8.
+	
+	if( !(LIMIT-1-NOT-REACHED) AND !(LIMIT-2-REACHED) )
+	{
+		OPEN-LIGHT-ON = TRUE
+	}
+
+7.
+	
+	if( LIMIT-1-NOT-REACHED AND !(LIMIT-2-REACHED) )
+	{
+		AJAR-LIGHT-ON = TRUE
+	}
+
+9.
+
+	if( LIMIT-1-NOT-REACHED AND LIMIT-2-REACHED)
+	{
+		SHUT-LIGHT-ON = TRUE
+	}
 
 -------------------
 
-STOP-PRESSED LIMIT-2-REACHED(XIO) MOTORDOWN MOTORUP(XIO)
+2,4,6.
 
-if (MOTORUP(XIO) AND (STOP-PRESSED == TRUE OR MOTOR-DOWN == TRUE ) AND LIMIT-2-REACHED(XIO))
-{
-	MOTOR-DOWN = TRUE
-}
-else{
-	MOTOR-DOWN = FALSE
-}
--------------------
+	if (	!(MOTORDOWN) AND (OPEN-PRESSED OR MOTOR-UP ) AND LIMIT-1-NOT-REACHED )
+	{
+		MOTOR-UP = TRUE
+	}
 
-LIMIT-1-NOT-REACHED	LIMIT-2-REACHED	OPEN	AJAR	SHUT
-T			T					F	T	F
-T			F					F	F	T
-F			T					T	F	F
-F			F					-	-	-
+3,5,6.
+
+	if ( (!MOTORUP) AND (STOP-PRESSED  OR MOTOR-DOWN ) AND !(LIMIT-2-REACHED) )
+	{
+		MOTOR-DOWN = TRUE
+	}
+1. Issue to resolve : Do not use Unlatch
+
+	if !( STOP-PRESSED )
+	{
+		MOTOR-UP(U) = FALSE
+		MOTOR-DOWN(U) = FALSE
+	}
 
 
-if((LIMIT-1-NOT-REACHED(XIO)) and (LIMIT-2-REACHED(XIO)))
-{
-	OPEN-LIGHT-ON = TRUE
-}
-
-if((LIMIT-1-NOT-REACHED(XIc)) and (LIMIT-2-REACHED(XIO)))
-{
-	AJAR-LIGHT-ON = TRUE
-}
-
-if((LIMIT-1-NOT-REACHED(XIC)) and (LIMIT-2-REACHED(XIC)))
-{
-	SHUT-LIGHT-ON = TRUE
-}
-
--------------------
-if(STOP-PRESSED(XIO))
-{
-	MOTOR-UP(U) = FALSE
-	MOTOR-DOWN(U) = FALSE
-}
