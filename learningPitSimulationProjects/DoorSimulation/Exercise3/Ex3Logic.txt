@@ -1,0 +1,69 @@
+Requirements:
+
+1.If the Door is fully open, the Open lamp will be energized but not flashing as was the case before.
+
+2.If the Door is opening, the Open lamp will flash while the door is in motion
+
+3.If the Door is fully closed, the Shut lamp will be energized but not flashing as was the case before.
+
+4.If the Door is closing, the Shut lamp will flash while the door is in motion
+
+5.The Ajar Lamp will flash if the door is stationary, and is not in the fully open or fully closed position. The Ajar Lamp will flash at a slower rate (1/4) then the other lamps
+
+6. The Ajar Lamp will be illuminated in a steady state if the door is in motion
+
+States:
+
+LIMIT-1-NOT-ACTIVATED 	| LIMIT-2-ACTIVATED 	| Possible States of Door |
+--------------------------------------------------------------------------|
+F 			|T			| DOOR-Fully-Open	  |
+------------------------|-----------------------|-------------------------|
+T			|T			| DOOR-In-Mid-Way 	  |
+------------------------|-----------------------|---------------|---------|
+T 			|F			| DOOR-Fully-Shut	  |
+
+_______________________________________________________________________________
+
+
+MOTOR-UP	| MOTOR-DOWN 	| Door State
+----------------|---------------|-------------------|
+F		| F 		| DOOR-Fully-Stoped |
+----------------|---------------|-------------------|
+ -		| - 		| DOOR-In-Motion    |
+
+Fullfillment:
+
+1.
+	if( DOOR-Fully-Open )
+	{
+		OPEN-LIGHT-ON 		= TRUE
+		OPEN-LIGHT-FLASHING 	= FALSE
+	}
+2.
+	if( DOOR-In-Mid-Way AND DOOR-In-Motion )
+	{
+		OPEN-LIGHT-FLASHING 	= TRUE
+	}
+3.
+	if( DOOR-Fully-Shut )
+	
+	{
+		SHUT-LIGHT-ON 		= TRUE
+		SHUT-LIGHT-FLASHING 	= FALSE
+	}
+4.
+	if( DOOR-In-Mid-Way AND DOOR-In-Motion )
+	{
+		SHUT-LIGHT-FLASHING 	= TRUE
+	}
+5.
+	if( DOOR-Fully-Stoped )
+	{
+		AJAR-LIGHT-FLASHING	= TRUE - (1/4 SPEED)
+	}
+6.
+	if( DOOR-In-Motion )
+	{
+		AJAR-LIGHT-ON 		= TRUE
+		AJAR-LIGHT-FLASHING	= FALSE
+	}
