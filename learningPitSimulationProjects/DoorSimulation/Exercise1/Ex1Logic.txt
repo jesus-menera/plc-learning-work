@@ -21,7 +21,7 @@ States:
 	buttons:	OPEN-PRESSED,	CLOSE-PRESSED
 	lights:		OPEN-LIGHT-ON, SHUT-LIGHT-ON
 	motor:		MOTOR-UP, MOTOR-DOWN
-	limits:		LIMIT-1-NOT-ACTIVATED,	LIMIT-2-ACTIVATED
+	limits:		LIMIT-1-ACTIVATED,	LIMIT-2-ACTIVATED
 
 
 Fulfillment:
@@ -29,7 +29,7 @@ Fulfillment:
 1. Done
 2,4,6. Done
 
-	if ( (!(MOTOR-DOWN) AND OPEN-PRESSED AND LIMIT-1-NOT-ACTIVATED)
+	if ( (!(MOTOR-DOWN) AND OPEN-PRESSED AND LIMIT-1-ACTIVATED)
 	{
 		MOTOR-UP = TRUE
 	}
@@ -43,7 +43,7 @@ Fulfillment:
 
 7.
 
-	if( !(LIMIT-1-NOT-REACHED) )
+	if( !(LIMIT-1-ACTIVATED) )
 	{
 		OPEN-LIGHT-ON = TRUE
 	}
