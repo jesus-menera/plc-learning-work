@@ -14,22 +14,28 @@ Requirements:
 
 States:
 
-LIMIT-1-NOT-ACTIVATED 	| LIMIT-2-ACTIVATED 	| Possible States of Door |
+LIMIT-1-ACTIVATED 	| LIMIT-ACTIVATED 	| Possible States of Door |
 --------------------------------------------------------------------------|
-F 			| T			| DOOR-Fully-Open	  |
+T 			| T			| DOOR-Fully-Shut	  |
 ------------------------|-----------------------|-------------------------|
-T			| T			| DOOR-In-Mid-Way 	  |
-------------------------|-----------------------|---------------|---------|
-T 			| F			| DOOR-Fully-Shut	  |
+T			| F			| DOOR-In-Mid-Way 	  |
+------------------------|-----------------------|-------------------------|
+F 			| F			| DOOR-Fully-Open	  |
 
 _______________________________________________________________________________
 
 
 MOTOR-UP	| MOTOR-DOWN 	| Door State
-----------------|---------------|-------------------|
-F		| F 		| DOOR-Fully-Stoped |
-----------------|---------------|-------------------|
- -		| - 		| DOOR-In-Motion    |
+----------------|---------------|--------------------|
+F		| F 		| DOOR-Fully-Stopped |
+----------------|---------------|--------------------|
+T		| F 		| DOOR-Opening       |
+----------------|---------------|--------------------|
+F		| T 		| DOOR-Closing       |
+ 
+ ______________________________________________________________________________
+ 
+ 
 
 Fulfillments:
 
@@ -40,8 +46,9 @@ Fulfillments:
 		OPEN-LIGHT-FLASHING 	= FALSE
 	}
 2.
-	if( DOOR-In-Mid-Way AND DOOR-In-Motion )
+	if( DOOR-In-Mid-Way AND DOOR-Opening )
 	{
+		OPEN-LIGHT-ON 		= TRUE
 		OPEN-LIGHT-FLASHING 	= TRUE
 	}
 3.
@@ -52,17 +59,19 @@ Fulfillments:
 		SHUT-LIGHT-FLASHING 	= FALSE
 	}
 4.
-	if( DOOR-In-Mid-Way AND DOOR-In-Motion )
+	if( DOOR-In-Mid-Way AND DOOR-closing )
 	{
+		SHUT-LIGHT-ON 		= TRUE
 		SHUT-LIGHT-FLASHING 	= TRUE
 	}
 5.
-	if( DOOR-Fully-Stoped )
+	if( DOOR-In-Mid-Way AND DOOR-Fully-Stopped )
 	{
+		AJAR-LIGHT-ON = 	TRUE
 		AJAR-LIGHT-FLASHING	= TRUE - (1/4 SPEED)
 	}
 6.
-	if( DOOR-In-Motion )
+	if( DOOR-In-Mid-Way AND !DOOR-Fully-Stopped )
 	{
 		AJAR-LIGHT-ON 		= TRUE
 		AJAR-LIGHT-FLASHING	= FALSE
