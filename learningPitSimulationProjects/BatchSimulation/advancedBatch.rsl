@@ -1,0 +1,460 @@
+FILE,LAD 2
+SOR,0 BST,1 XIC,I:1/11 BST,2 JSR,U:6 NXB,2 OTU,B3:1/0 BND,2 NXB,1 XIO,I:1/11 XIO,B3:1/0 BST,2 JSR,U:8 NXB,2 OTL,B3:1/0 BND,2 BND,1 EOR,0
+RCM,
+SOR,1 BST,1 XIC,I:1/11 OTL,U:6 NXB,1 XIO,I:1/11 OTU,U:6 BND,1 EOR,1
+RCM,Makes Timer-00 available
+SOR,2 XIC,I:1/11 BST,1 EQU,C5:0.ACC,0 NXB,1 BST,2 EQU,C5:0.ACC,1 XIC,S:4/5 NXB,2 BST,3 EQU,C5:0.ACC,2 XIC,S:4/7 NXB,3 EQU,C5:0.ACC,3 XIC,S:4/3 BND,3 BND,2 BND,1 OTE,O:2/6 EOR,2
+RCM,
+SOR,3 XIC,I:1/11 XIC,B3:0/10 OTE,O:2/5 EOR,3
+RCM,
+SOR,4 XIC,I:1/9 BST,1 XIC,I:1/0 XIO,I:1/4 OTE,O:2/1 NXB,1 XIO,I:1/1 XIC,I:1/3 OTE,O:2/3 BND,1 EOR,4
+RCM,
+SOR,5 XIC,I:1/5 CTU,C5:1,0 EOR,5
+RCM,
+SOR,6 XIC,I:1/7 OTE,0 CTD,C5:1,0 EOR,6
+RCM,
+SOR,7 TOD,C5:1.ACC,O:4 EOR,7
+RCM,
+SOR,8 END,8
+RCM,
+FILE,SBR 3:
+SOR,0 SBR,U:3 EOR,0
+RCM,
+SOR,1 FRD,I:3,N7:0 TOD,N7:0,O:4 EOR,1
+RCM,set new batch count, and display it.
+SOR,2 RET,U:3 EOR,2
+RCM,
+SOR,3 END,3
+RCM,
+FILE,SBR 4:
+SOR,0 SBR,U:4 EOR,0
+RCM,
+SOR,1 FRD,I:3,N7:10 EOR,1
+RCM,Get new pump% from input
+SOR,2 LEQ,N7:10,100 ADD,N7:10,N7:2,N7:11 EOR,2
+RCM,Continue if new Pump1% is <=100
+SOR,3 LEQ,N7:11,100 MOV,N7:10,N7:1 ADD,N7:10,1000,N7:11 TOD,N7:11,O:4 EOR,3
+RCM,Continue if new Pump1% + Pump2% <=100, if so set as new Pump1%
+SOR,4 MOV,0,N7:10 MOV,0,N7:11 EOR,4
+RCM,
+SOR,5 RET,U:4 EOR,5
+RCM,
+SOR,6 END,6
+RCM,
+FILE,SBR 5:
+SOR,0 SBR,U:5 EOR,0
+RCM,
+SOR,1 FRD,I:3,N7:10 EOR,1
+RCM,Get new pump% from input
+SOR,2 LEQ,N7:10,100 ADD,N7:10,N7:1,N7:11 EOR,2
+RCM,Continue if new Pump2% is <=100
+SOR,3 LEQ,N7:11,100 MOV,N7:10,N7:2 ADD,N7:10,2000,N7:11 TOD,N7:11,O:4 EOR,3
+RCM,Continue if new Pump1% + Pump2% <=100, if so set as new Pump1%
+SOR,4 MOV,0,N7:10 MOV,0,N7:11 EOR,4
+RCM,
+SOR,5 RET,U:5 EOR,5
+RCM,
+SOR,6 END,6
+RCM,
+FILE,SBR 6:
+SOR,0 SBR,U:6 EOR,0
+RCM,
+SOR,1 XIC,I:1/8 TON,T4:0,10 EOR,1
+RCM,
+SOR,2 BST,1 XIO,B3:0/8 NXB,1 GEQ,T4:0.ACC,1 BND,1 BST,1 BST,2 GEQ,T4:0.ACC,5 NXB,2 XIC,B3:0/7 BND,2 BST,2 OTE,B3:0/7 NXB,2 OTE,B3:0/10 BND,2 NXB,1 BST,2 GEQ,T4:0.ACC,1 LES,T4:0.ACC,5 NXB,2 XIC,B3:0/6 BND,2 OTE,B3:0/6 BND,1 EOR,2
+RCM,Choose between switch to next option or hold button to edit.
+SOR,3 EOR,3
+RCM,
+SOR,4 XIO,T4:0/TT XIO,B3:0/7 XIC,B3:0/6 CTU,C5:0,0 EOR,4
+RCM,Advance counter to point to next option if only ckicked.
+SOR,5 BST,1 GEQ,C5:0.ACC,4 NXB,1 LES,C5:0.ACC,0 BND,1 RES,C5:0 EOR,5
+RCM,Cycle between option 0(Batch Count),1(Pump1 %),2(Pump2 %),3(TankCapacity%)
+SOR,6 XIO,T4:0/TT EQU,C5:0.ACC,0 BST,1 XIC,B3:0/7 OTE,B3:0/0 NXB,1 XIO,B3:0/7 XIC,B3:0/6 OTE,B3:0/3 BND,1 EOR,6
+RCM,
+SOR,7 XIO,T4:0/TT EQU,C5:0.ACC,1 BST,1 XIC,B3:0/7 OTE,B3:0/1 NXB,1 XIO,B3:0/7 XIC,B3:0/6 OTE,B3:0/4 BND,1 EOR,7
+RCM,
+SOR,8 XIO,T4:0/TT EQU,C5:0.ACC,2 BST,1 XIC,B3:0/7 OTE,B3:0/2 NXB,1 XIO,B3:0/7 XIC,B3:0/6 OTE,B3:0/5 BND,1 EOR,8
+RCM,
+SOR,9 XIO,T4:0/TT EQU,C5:0.ACC,3 BST,1 XIC,B3:0/7 OTE,B3:0/11 NXB,1 XIO,B3:0/7 XIC,B3:0/6 OTE,B3:0/12 BND,1 EOR,9
+RCM,
+SOR,10 XIO,T4:0/TT BST,1 XIC,B3:0/3 TOD,N7:0,O:4 NXB,1 BST,2 XIC,B3:0/4 ADD,N7:1,1000,N7:10 TOD,N7:10,O:4 NXB,2 BST,3 XIC,B3:0/5 ADD,N7:2,2000,N7:10 TOD,N7:10,O:4 NXB,3 BST,4 XIC,B3:0/0 JSR,U:3 NXB,4 BST,5 XIC,B3:0/1 JSR,U:4 NXB,5 BST,6 XIC,B3:0/2 JSR,U:5 NXB,6 BST,7 OTE,B3:0/9 NXB,7 BST,8 XIC,B3:0/12 ADD,N7:3,3000,N7:10 TOD,N7:10,O:4 NXB,8 XIC,B3:0/11 JSR,U:7 BND,8 BND,7 BND,6 BND,5 BND,4 BND,3 BND,2 BND,1 EOR,10
+RCM,
+SOR,11 XIC,B3:0/9 BST,1 XIO,B3:0/7 XIC,B3:0/6 NXB,1 XIC,B3:0/7 BND,1 OTE,B3:0/8 EOR,11
+RCM,
+SOR,12 RET,U:6 EOR,12
+RCM,
+SOR,13 END,13
+RCM,
+FILE,SBR 7:
+SOR,0 SBR,U:7 EOR,0
+RCM,
+SOR,1 FRD,I:3,N7:10 EOR,1
+RCM,set new batch count, and display it.
+SOR,2 LEQ,N7:10,100 MOV,N7:10,N7:3 ADD,N7:3,3000,N7:10 TOD,N7:10,O:4 EOR,2
+RCM,
+SOR,3 RET,U:7 EOR,3
+RCM,
+SOR,4 EOR,4
+RCM,
+SOR,5 END,5
+RCM,
+FILE,SBR 8:
+SOR,0 SBR,U:8 EOR,0
+RCM,
+SOR,1 XIC,I:1/9 XIC,I:1/8 MUL,N7:4,N7:3,N7:10 DIV,N7:10,100,N7:5 EOR,1
+RCM,Figure out up to what capacity the tank will be fulled, call it - Desired Batch Amount.
+SOR,2 XIC,I:1/9 XIC,I:1/8 MUL,N7:5,N7:1,N7:10 DIV,N7:10,100,N7:6 EOR,2
+RCM,Out of Desired Batch Amount, How much Pump1% will it be?
+SOR,3 XIC,I:1/9 XIC,I:1/8 MUL,N7:5,N7:2,N7:10 DIV,N7:10,100,N7:7 EOR,3
+RCM,Out of Desired Batch Amount, How much Pump2% will it be?
+SOR,4 RET,U:8 EOR,4
+RCM,
+SOR,5 END,5
+RCM,
+FILE,SBR 9:
+SOR,0 END,0
+RCM,
+BTBL
+512
+1
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+NTBL
+1775
+76
+25
+99
+306
+302
+226
+75
+0
+0
+7550
+306
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+FTBL
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+SYMBOLS
+U:2 GetBatchProportions
+U:3 SetBatchQuantity
+I:1/11 SW-IN-C-ENTER-INFO-MODE
+T4:0 Input-Timer
+O:2/6 Idle-Light-ON
+B3:0/0 set-up-Quantity
+B3:0/1 set-up-Pump1%
+C5:0 User-Defined-Parameters
+B3:0/2 set-up-Pump2%
+U:4 SetPump1Percent
+U:5 SetPump2Percent
+U:6 SetUserDefinedParams
+I:1/8 BT-Enter-Pressed
+B3:0/3 Displaying-Quantity
+B3:0/4 Displaying-Pump1%
+B3:0/5 Displaying-Pump2%
+B3:0/6 Click-Choice
+B3:0/7 Hold-Choice
+B3:0/8 Reset-Choice
+T4:0/TT Input-Timer
+B3:0/9 Done Choicing
+B3:0/10 Entered-Set-Function
+O:2/5 Run-Light-ON
+B3:0/11 set-up-TankCapacity%
+B3:0/12 Displaying-TankCapacity%
+U:7 set-up-TankCapacity%
+N7:0 Batch Count
+N7:1 Pump1%
+N7:2 Pump2%
+N7:3 TankCapacity%
+C5:1 Flow-SR-for-Pump1
+I:1/9 SW-IN-A-CONTINUOS-MODE
+O:2/1 Pump1-RUN
+I:1/0 BT-Start-PRESSED
+I:1/1 BT-Stop-PRESSED
+I:1/4 HI-LEVEL-Tank-Full
+I:1/3 LO-LEVEL-Tank-Not-Empty
+N7:4 Tank-Capacity-at-Full
+U:8 initialize-Tank-Level-Percen
+B3:1/0 Figured-Out-Tank-Percentages
