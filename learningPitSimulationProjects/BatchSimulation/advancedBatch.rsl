@@ -13,9 +13,7 @@ SOR,5 XIC,I:1/5 CTU,C5:1,0 EOR,5
 RCM,
 SOR,6 XIC,I:1/7 OTE,0 CTD,C5:1,0 EOR,6
 RCM,
-SOR,7 TOD,C5:1.ACC,O:4 EOR,7
-RCM,
-SOR,8 END,8
+SOR,7 END,7
 RCM,
 FILE,SBR 3:
 SOR,0 SBR,U:3 EOR,0
@@ -101,11 +99,11 @@ RCM,
 FILE,SBR 8:
 SOR,0 SBR,U:8 EOR,0
 RCM,
-SOR,1 XIC,I:1/9 XIC,I:1/8 MUL,N7:4,N7:3,N7:10 DIV,N7:10,100,N7:5 EOR,1
+SOR,1 MUL,N7:4,N7:3,N7:10 DIV,N7:10,100,N7:5 EOR,1
 RCM,Figure out up to what capacity the tank will be fulled, call it - Desired Batch Amount.
-SOR,2 XIC,I:1/9 XIC,I:1/8 MUL,N7:5,N7:1,N7:10 DIV,N7:10,100,N7:6 EOR,2
+SOR,2 MUL,N7:5,N7:1,N7:10 DIV,N7:10,100,N7:6 EOR,2
 RCM,Out of Desired Batch Amount, How much Pump1% will it be?
-SOR,3 XIC,I:1/9 XIC,I:1/8 MUL,N7:5,N7:2,N7:10 DIV,N7:10,100,N7:7 EOR,3
+SOR,3 MUL,N7:5,N7:2,N7:10 DIV,N7:10,100,N7:7 EOR,3
 RCM,Out of Desired Batch Amount, How much Pump2% will it be?
 SOR,4 RET,U:8 EOR,4
 RCM,
@@ -216,18 +214,18 @@ BTBL
 0
 0
 NTBL
-1775
-76
-25
-99
+5000
+95
+5
+100
 306
-302
-226
-75
+306
+290
+15
 0
 0
-7550
-306
+1530
+0
 0
 0
 0
