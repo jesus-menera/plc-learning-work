@@ -1,0 +1,368 @@
+FILE,LAD 2
+SOR,0 XIO,T4:3/DN TON,T4:0,120 EOR,0
+RCM,
+SOR,1 XIC,T4:0/DN TON,T4:1,10 EOR,1
+RCM,
+SOR,2 XIC,T4:1/DN TON,T4:2,120 EOR,2
+RCM,
+SOR,3 XIC,T4:2/DN TON,T4:3,10 EOR,3
+RCM,
+SOR,4 BST,1 XIC,T4:0/TT NXB,1 BST,2 XIC,T4:1/TT NXB,2 XIC,T4:3/TT BND,2 BND,1 OTE,O:2/0 EOR,4
+RCM,
+SOR,5 BST,1 XIC,T4:1/TT NXB,1 BST,2 XIC,T4:2/TT NXB,2 XIC,T4:3/TT BND,2 BND,1 OTE,O:2/4 EOR,5
+RCM,
+SOR,6 XIO,T4:5/DN BST,1 XIC,T4:0/TT NXB,1 XIC,T4:2/TT BND,1 TON,T4:4,80 EOR,6
+RCM,
+SOR,7 XIC,T4:4/DN TON,T4:5,40 EOR,7
+RCM,
+SOR,8 XIC,T4:4/TT BST,1 XIC,T4:0/TT OTE,O:2/6 NXB,1 XIC,T4:2/TT OTE,O:2/2 BND,1 EOR,8
+RCM,
+SOR,9 XIC,T4:5/TT BST,1 XIC,T4:0/TT OTE,O:2/5 NXB,1 XIC,T4:2/TT OTE,O:2/1 BND,1 EOR,9
+RCM,
+SOR,10 END,10
+RCM,
+FILE,SBR 3:
+SOR,0 END,0
+RCM,
+FILE,SBR 4:
+SOR,0 END,0
+RCM,
+FILE,SBR 5:
+SOR,0 END,0
+RCM,
+FILE,SBR 6:
+SOR,0 END,0
+RCM,
+FILE,SBR 7:
+SOR,0 END,0
+RCM,
+FILE,SBR 8:
+SOR,0 END,0
+RCM,
+FILE,SBR 9:
+SOR,0 END,0
+RCM,
+BTBL
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+NTBL
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+FTBL
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+SYMBOLS
+O:2/0 Left-Red-Light-ON
+O:2/4 Right-Red-Light-ON
+T4:0 Left-Red-Timer-00
+T4:1 Left-Wait-Timer-01
+T4:2 Right-Red-Timer-02
+T4:3 Right-Wait-Timer-03
+T4:0/DN Left-Red-Timer-00
+T4:1/DN Left-Wait-Timer-01
+T4:2/DN Right-Red-Timer-02
+T4:3/DN Right-Wait-Timer-03
+T4:0/TT Left-Red-Timer-00-COUNTING
+T4:1/TT Left-Wait-Timer-01-COUNTING
+T4:2/TT Right-Red-Timer-02-COUNTING
+T4:3/TT Right-Wait-TIimer-03-COUNTIN
+T4:4 Green-Timer-04
+T4:5 Amber-Timer-05
+O:2/5 Right-Amber-Light-ON
+O:2/6 Right-Green-Light-ON
+O:2/2 Left-Green-Light-ON
+O:2/1 Left-Amber-Light-ON
