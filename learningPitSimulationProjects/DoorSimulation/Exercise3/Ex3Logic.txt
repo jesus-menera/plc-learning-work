@@ -14,7 +14,7 @@ Requirements:
 
 States:
 
-LIMIT-1-ACTIVATED 	| LIMIT-ACTIVATED 	| Possible States of Door |
+LIMIT-1-ACTIVATED 	| LIMIT-2-ACTIVATED 	| Possible States of Door |
 --------------------------------------------------------------------------|
 T 			| T			| DOOR-Fully-Shut	  |
 ------------------------|-----------------------|-------------------------|
