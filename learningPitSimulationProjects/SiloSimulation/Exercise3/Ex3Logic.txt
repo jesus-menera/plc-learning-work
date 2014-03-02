@@ -1,0 +1,14 @@
+Requirements:
+	
+	    1.	When the selector switch is in position "A", the system shall operate in 
+	    	the "Continuous" mode of operation. This is the mode of operation which was used in Exercise #1.
+	
+	    2.	When the selector switch is in position "B", the system shall operate in 
+	    	the "Manual Restart" mode of operation. This is the mode of operation which
+	    	was used in Exercise #2.
+	
+	    3.	When the selector switch is in position "C", the system shall operate in 
+	    	the "Fill Bypass" mode of operation. In this mode, the boxes will simply move 
+	    	down the conveyor continuously and bypass the fill operation. As in the other 
+	    	modes, the Start and Stop pushbuttons will control the conveyor motion and the 
+	    	Run Lamp will operate as expected.

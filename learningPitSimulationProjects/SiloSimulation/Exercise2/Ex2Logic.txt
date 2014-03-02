@@ -1,0 +1,20 @@
+Requirements:
+	
+	    1.	Stop the conveyor when the right edge of the box is first sensed by 
+	    	the prox-sensor.
+	
+	    2.	With the box in position and the conveyor stopped, open the solenoid 
+	    	valve and allow the box to fill. Filling should stop when the Level sensor 
+	    	goes true.
+	
+	    3.	The FILL light will be energized while the box is filling.
+	
+	    4.	The FULL light will energize when the box is full and will 
+	    	remain that way until the box has moved clear of the prox-sensor.
+	
+	    5.	Once the box is full, momentarily pressing the Start Switch will
+	    	move the box off the conveyor and bring a new box into position. 
+	    	Forcing the operator to hold the Start button down until the box 
+	    	clears the prox-sensor is not acceptable.
+	
+ 

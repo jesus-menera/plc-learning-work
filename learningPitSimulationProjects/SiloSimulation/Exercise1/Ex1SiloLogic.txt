@@ -1,0 +1,31 @@
+Requirements:
+
+    1.	The sequence can be stopped and re-started at any time 
+    	using the panel mounted Stop and Start switches.
+
+    2	The RUN light will remain energized as long as the system 
+    	is operating automatically.
+
+    3.	The RUN light, Conveyor Motor and Solenoid will de-energize 
+    	whenever the system is halted via the STOP switch.
+
+    4.	The FILL light will be energized while the box is filling.
+
+    5.	The FULL light will energize when the box is full and will 
+    	remain that way until the box has moved clear of the prox-sensor.
+ 
+States:
+	lights:	  	RUN-LIGHT-ON, FILL-LIGHT-ON, FULL-LIGHT-ON
+	motor:	  	MOTOR-ON
+	buttons:  	BT-START-PRESSED, BT-STOP-NOT-PRESSED
+	valve:	  	VALVE-NOT-OPEN
+	level-sensor:	LEVEL-SR-BOX-FILLED
+	prox-sensor:	PX-SR-BOX-IN-POSITION
+	
++-----------------------+---------------------+---------------+---------------+----------+
+| PX-SR-BOX-IN-POSITION | LEVEL-SR-BOX-FILLED | FILL-LIGHT-ON | FULL-LIGHT-ON | MOTOR-ON |
++-----------------------+---------------------+---------------+---------------+----------+
+| T                     | T                   | F             | T             | T        |
+| T                     | F                   | T             | F             | F        |
+| F                     | F                   | F             | F             | T        |
++-----------------------+---------------------+---------------+---------------+----------+
