@@ -7,7 +7,7 @@ SOR,2 XIC,I:1/1 BST,1 XIO,I:1/11 BST,2 XIC,I:1/0 NXB,2 XIC,O:2/5 BND,2 NXB,1 XIC
 RCM,
 SOR,3 BST,1 XIC,I:1/11 BST,2 EQU,C5:0.ACC,0 NXB,2 BST,3 EQU,C5:0.ACC,1 XIC,S:4/5 NXB,3 BST,4 EQU,C5:0.ACC,2 XIC,S:4/7 NXB,4 EQU,C5:0.ACC,3 XIC,S:4/3 BND,4 BND,3 BND,2 NXB,1 XIO,I:1/11 XIO,O:2/5 BND,1 OTE,O:2/6 EOR,3
 RCM,
-SOR,4 XIO,I:1/11 XIC,O:2/5 OTE,B3:2/0 EOR,4
+SOR,4 XIO,I:1/11 XIC,O:2/5 GRT,N7:0,0 OTE,B3:2/0 EOR,4
 RCM,
 SOR,5 XIC,B3:2/0 XIC,I:1/3 GRT,C5:1.ACC,0 EQU,C5:4.ACC,1 OTE,B3:2/8 EOR,5
 RCM,
@@ -70,7 +70,7 @@ SOR,10 RET,U:3 EOR,10
 RCM,
 SOR,11 END,11
 RCM,
-FILE,SBR 4:
+FILE,SBR 4: Init-Tank-Info-Set-Display
 SOR,0 SBR,U:4 EOR,0
 RCM,
 SOR,1 MOV,306,N7:4 EOR,1
@@ -81,22 +81,26 @@ SOR,3 MUL,N7:5,N7:1,N7:10 DIV,N7:10,100,N7:6 EOR,3
 RCM,Out of Desired Batch Amount, How much Pump1% will it be?
 SOR,4 MUL,N7:5,N7:2,N7:10 DIV,N7:10,100,N7:7 EOR,4
 RCM,Out of Desired Batch Amount, How much Pump2% will it be?
-SOR,5 RET,U:4 EOR,5
+SOR,5 TOD,N7:0,O:4 EOR,5
 RCM,
-SOR,6 END,6
+SOR,6 RET,U:4 EOR,6
 RCM,
-FILE,SBR 5:
+SOR,7 END,7
+RCM,
+FILE,SBR 5: Restart-Process
 SOR,0 SBR,U:5 EOR,0
-RCM,
+RCM,After batch is done, reset timers and state counters
 SOR,1 BST,1 RES,C5:1 NXB,1 BST,2 RES,C5:2 NXB,2 RES,C5:3 BND,2 BND,1 EOR,1
 RCM,
 SOR,2 RES,C5:4 EOR,2
 RCM,
-SOR,3 RET,U:5 EOR,3
+SOR,3 SUB,N7:0,1,N7:0 TOD,N7:0,O:4 EOR,3
+RCM,Decrement batch count, and display updated count
+SOR,4 RET,U:5 EOR,4
 RCM,
-SOR,4 END,4
+SOR,5 END,5
 RCM,
-FILE,SBR 6:
+FILE,SBR 6: SetUserDefinedParams
 SOR,0 SBR,U:6 EOR,0
 RCM,
 SOR,1 XIC,I:1/8 TON,T4:0,10 EOR,1
@@ -236,7 +240,7 @@ BTBL
 0
 0
 NTBL
-6000
+0
 50
 50
 100
@@ -256,7 +260,7 @@ NTBL
 0
 0
 0
-3
+0
 0
 0
 0
@@ -447,7 +451,7 @@ B3:0/0 set-up-Quantity
 B3:0/1 set-up-Pump1%
 C5:0 User-Defined-Parameters
 B3:0/2 set-up-Pump2%
-U:4 initialize-Tank-Level-Percen
+U:4 Init-Tank-Info-Set-Display
 U:5 Restart-Process
 U:6 SetUserDefinedParams
 I:1/8 BT-Enter-Pressed
