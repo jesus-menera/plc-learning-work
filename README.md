@@ -5,4 +5,4 @@ solutions for problems found on the following url:
 http://thelearningpit.com/lp/doc/index.html
 
 using LogixPro® 500 Allen-Bradley PLC Simulators
-found http://thelearningpit.com/lp/logixpro.html
+found at: http://thelearningpit.com/lp/logixpro.html
